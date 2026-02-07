@@ -39,5 +39,16 @@ app.delete("/api/notes/:id",async  (req,res)=>{
         message : "Notes Deleted successfully"
     })
 })
+app.patch("/api/notes/:id",async  (req,res)=>{ 
+    const {Title, Description} = req.body
+    const noteId = req.params.id
+     await noteModel.findByIdAndUpdate(noteId, {
+        Title : Title,
+        Description : Description
+    })
+    res.status(200).json({
+        message : "Notes Updated successfully",
+    })
+})
 
 module.exports = app
